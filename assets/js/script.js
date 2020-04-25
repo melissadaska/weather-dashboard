@@ -72,18 +72,17 @@ function getWeather(cityName) {
             }
         })
     });
-
-    // display response for 5 day forecast underneath current conditions
-
 }
     
-
-    
-    
-
-
 // add event listener to search button
+searchButtonEl.addEventListener("click", function() { 
+    searchTerm = cityInputEl.value;
+    getWeather(searchTerm);
+    searchHistory.push(searchTerm);
+    localStorage.setItem("search", JSON.stringify(searchHistory));
     // call search history
+})
+    
 
 // add function to render search history
 
