@@ -6,6 +6,7 @@ const currentTempEl = document.getElementById("temperature");
 const currentHumidityEl = document.getElementById("humidity");
 const currentWindEl = document.getElementById("wind-speed");
 const currentUVEl = document.getElementById("UV-index");
+const historyEl = document.getElementById("history");
 var searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 console.log(searchHistory);
 
@@ -80,9 +81,28 @@ searchButtonEl.addEventListener("click", function() {
     getWeather(searchTerm);
     searchHistory.push(searchTerm);
     localStorage.setItem("search", JSON.stringify(searchHistory));
-    // call search history
+    getSearchHistory();
 })
     
+function getSearchHistory() {
+    historyEl.innerHTML = "";
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historySelect = document.createElement("input");
+            historySelect.setAttribute("type","text");
+            historySelect.setAttribute("readonly",true);
+            historySelect.setAttribute("class", "form-control d-block bg-white");
+            historySelect.setAttribute("value", searchHistory[i]);
+            historySelect.addEventListener("click",function() {
+                getWeather(historySelect.value);
+            })
+            historyEl.append(historySelect);
+    }
+}
+
+getSearchHistory();
+if (searchHistory.length > 0) {
+    getWeather(searchHistory[searchHistory.length - 1]);
+}
 
 // add function to render search history
 
