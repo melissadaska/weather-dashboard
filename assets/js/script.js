@@ -72,14 +72,14 @@ function getWeather(cityName) {
                     forecastDateEl.innerHTML = forecastMonth + "/" + forecastDay + "/" + forecastYear;
                     forecastEl[i].append(forecastDateEl);
                     let imageEl = document.createElement("img");
-                    imageEl.setAttribute("src","https://openweathermap.org/img/wn/" + response.list[forecastIndex].weather[0].icon + "@2x.png");
-                    imageEl.setAttribute("alt",response.list[forecastIndex].weather[0].description);
+                    imageEl.setAttribute("src","https://openweathermap.org/img/wn/" + response.list[0].weather[0].icon + "@2x.png");
+                    imageEl.setAttribute("alt",response.list[0].weather[0].description);
                     forecastEl[i].append(imageEl);
                     let forecastTempEl = document.createElement("p");
-                    forecastTempEl.innerHTML = "Temp: " + k2f(response.list[forecastIndex].main.temp) + " &#176F";
+                    forecastTempEl.innerHTML = "Temp: " + k2f(response.list[i].main.temp) + " &#176F";
                     forecastEl[i].append(forecastTempEl);
                     let forecastHumidityEl = document.createElement("p");
-                    forecastHumidityEl.innerHTML = "Humidity: " + response.list[forecastIndex].main.humidity + "%";
+                    forecastHumidityEl.innerHTML = "Humidity: " + response.list[i].main.humidity + "%";
                     forecastEl[i].append(forecastHumidityEl);
                 }
             })
@@ -131,6 +131,7 @@ function checkStorage() {
     }
 }
 checkStorage();
+
 
 
 
